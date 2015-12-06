@@ -1,0 +1,23 @@
+{% load staticfiles %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'packmanApp/style.css' %}" />
+
+<h1>Current Statistics</h1>
+{% if profile %}
+	<h2>Your best score is {{ profile.bestScore }}</h2>
+	<h2>Your average score is {{ profile.avgScore }}</h2>
+{% endif %}
+{% if profile.team %}
+	<br /><h2>Your team's best score is {{ profile.team.bestScore }}</h2>
+	<h2>Your team's average score is {{ profile.team.avgScore }}</h2>
+{% endif %}
+{% if bestTeam %}
+	<br /><h2>The best team's score is {{ bestTeam.bestScore }}</h2>
+	<h2>The best team's average score is {{ bestTeam.avgScore }}</h2>
+{% endif %}
+
+<form action="http://127.0.0.1:8080/index.jsp">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Start New Game" />
+</form>

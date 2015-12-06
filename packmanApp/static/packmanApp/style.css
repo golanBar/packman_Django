@@ -1,0 +1,18 @@
+body {
+		background-color: lightblue;
+		color: white;
+		padding: 50px;
+		font-family: Arial, Verdana, sans-serif; }
+h1 {
+		background-color: DarkCyan;
+		padding: inherit;}
+h2 {
+		color: black;}		
+p {
+		padding: inherit;}
+ul {
+		color: black;
+		background: lightblue;
+		padding-left: 0;} 
+label {
+		color: black;}

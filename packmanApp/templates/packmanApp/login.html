@@ -1,0 +1,17 @@
+{% load staticfiles %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'packmanApp/style.css' %}" />
+
+
+<h1>Login</h1>
+
+<form name="LoginForm" action="" method="post">
+{% csrf_token %}
+{% if error %}
+	<p><font color="red">Please enter a valid user and password</p>
+{% endif %}
+<p><font color="black">Username <input type="text" name="packmanApp_username" placeholder="Enter Username"></p>
+<p>Password <input type="password" name="packmanApp_password" placeholder="Enter Password"></p>
+<p><input type="checkbox" name="createNewUser" /> Create new User</p>
+<br /><br /><button type="submit" class="btn">Login</button>
+</form>
