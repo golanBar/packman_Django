@@ -4,8 +4,6 @@ from django.template import RequestContext
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.views.decorators.csrf import csrf_exempt
-from django.core.files.base import File
-
 
 from packmanApp.models import Team, UserProfile
 
@@ -20,8 +18,6 @@ def loginUser(request):
             if user.is_active:
                 # User is valid, active and authenticated
                 login(request, user)
-                # save user's name, to be able to persist his score 
-                saveUserName(request.user.username)
                 if UserProfile.objects.get(user=request.user).team:
                     # user has already joined a group
                     context = {'profile': UserProfile.objects.get(user=request.user), 'bestTeam': findBestTeam()}    
@@ -69,12 +65,11 @@ def showStatistics(request):
 def persistScore(request): 
     print("in persistScore") 
     bodyUnicode = request.body.decode(encoding='UTF-8')
-    newScore = int(bodyUnicode.split('score=')[1])
-            
+    newScore = int(bodyUnicode.split('&')[0].split('score=')[1])
+    username = bodyUnicode.split('&')[1].split('username=')[1]   
+                
     # update user's data
-    username = loadUserName()
     profile = UserProfile.objects.get(user__username=username)
-    print(profile)
     if profile is not None:
         if profile.bestScore < newScore:
             profile.bestScore = newScore            
@@ -92,23 +87,11 @@ def persistScore(request):
     
     return(None)    
     
-def findBestTeam():
+def findBestTeam():    
+    bestTeam = None
     max = 0
     for team in Team.objects.all():
         if max<=team.bestScore:
             max = team.bestScore
             bestTeam = team
     return bestTeam
-
-def saveUserName(username):
-    f = open('currUser', 'w')
-    myfile = File(f)
-    myfile.write(username)
-    myfile.close()    
-    
-def loadUserName():
-    f = open('currUser', 'r')
-    myfile = File(f)
-    username = myfile.read()
-    myfile.close()
-    return(username)

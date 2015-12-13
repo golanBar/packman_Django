@@ -3,7 +3,7 @@
 <link rel="stylesheet" type="text/css" href="{% static 'packmanApp/style.css' %}" />
 
 <h1>Join a Team</h1>
-<form name="JoinForm" action ="/packmanApp/showStatistics/" method="post">
+<form name="JoinForm" action ="/showStatistics/" method="post">
 {% csrf_token %}
 {% if error %}
 	<p><font color="red">Please choose one of the teams</p>

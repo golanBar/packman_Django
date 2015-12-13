@@ -16,3 +16,10 @@ ul {
 		padding-left: 0;} 
 label {
 		color: black;}
+button, input[type=submit] {
+		background: #65a9d7;
+		padding: 9px 28px;
+		color: black;
+		font-size: 18;
+		font-family: Georgia, serif;
+		vertical-align: middle;}

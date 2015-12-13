@@ -16,8 +16,9 @@
 	<h2>The best team's average score is {{ bestTeam.avgScore }}</h2>
 {% endif %}
 
-<form action="http://127.0.0.1:8080/index.jsp">
+<form action="http://packmangame-golanbar.rhcloud.com/">
     {% csrf_token %}
     {{ form }}
+	<input type="hidden" name="username" value={{profile.user.username}}>
     <input type="submit" value="Start New Game" />
 </form>
